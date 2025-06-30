@@ -2,6 +2,7 @@
 auto(ferrariF50).
 auto(tesla).
 auto(amarok).
+moto(kawasaki).
 
 color(tesla, verde).
 
@@ -50,5 +51,6 @@ primo(Primo1, Primo2):-
 	tio(Tio, Primo1),
 	padre(Tio, Primo2).
 
-
 %ancestro/2
+
+siguiente(N, Siguiente):- Siguiente is N + 1.
