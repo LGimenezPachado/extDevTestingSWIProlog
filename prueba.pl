@@ -81,7 +81,14 @@ puntajes(julio,[9,7,3,9,10,2]).
 puntajes(ruben,[3,5,3,8,3]).
 puntajes(roque,[7,10,10]).
 
-puntajeSalto(Persona, Posicion, Puntaje) :-
+puntaje(Persona, Salto, Puntaje) :-
     puntajes(Persona, Lista),
-    nth1(Posicion, Lista, Puntaje).
+    nth1(Salto, Lista, Puntaje).
+
+estaDescalificado(Persona) :-
+    puntajes(Persona, Saltos),
+    length(Saltos, Cantidad),
+    Cantidad > 5.
+
+
 
