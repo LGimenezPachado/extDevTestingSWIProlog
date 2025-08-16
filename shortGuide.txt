@@ -1,0 +1,141 @@
+findall(QueQuiero, PredicadoQueUsaLaVariableQueQuiero, ListaDeLasCosasQueQuiero)
+
+• QueQuiero → la variable que queremos recolectar
+• PredicadoQueUsaLaVariableQueQuiero → las condiciones/predicados que generan esos valores
+• ListaDeLasCosasQueQuiero → el resultado final en forma de lista
+
+********************************************************************************************************************************************************************************
+forall(VariableQueRecorro, PredicadoQueDebeSerVerdaderoParaCadaVariable)
+
+• VariableQueRecorro → lo que queremos que se cumpla para todos los casos.
+• PredicadoQueDebeSerVerdaderoParaCadaVariable → lo que debe ser verdadero para cada uno de esos casos.
+
+“Para toda la VariableQueRecorro que cumple la condición implícita (generada por algún predicado), el PredicadoQueDebeSerVerdaderoParaCadaVariable debe ser verdadero.”
+
+********************************************************************************************************************************************************************************
+nth0(PosiciónDesde0, Lista, QuéElemento)
+
+Obtiene el elemento en la posición indicada contando desde 0.
+
+********************************************************************************************************************************************************************************
+nth1(PosiciónDesde1, Lista, QuéElemento)
+
+Obtiene el elemento en la posición indicada contando desde 1.
+
+********************************************************************************************************************************************************************************
+nth0(PosiciónDesde0, ListaOriginal, QuéElemento, ListaSinEseElemento)
+
+Similar a nth0/3, pero además devuelve Resto, la lista sin el elemento seleccionado.
+
+********************************************************************************************************************************************************************************
+nth1(PosiciónDesde1, ListaOriginal, QuéElemento, ListaSinEseElemento)
+
+Igual que nth0/4 pero el índice empieza en 1.
+
+********************************************************************************************************************************************************************************
+select(ElElementoQueQuiero, LaListaOriginal, LaListaQueQuedaSinElElemento)
+
+“Selecciona un Elemento de la ListaOriginal y devuelve en ListaSinElemento la misma lista pero sin ese elemento.”
+
+********************************************************************************************************************************************************************************
+length(LaLista, CuantosElementosTiene)
+
+Devuelve el número de elementos de Lista en Longitud.
+
+********************************************************************************************************************************************************************************
+member(ElementoQueBusco, ListaDondeBuscar)
+
+Verifica si Elemento está en Lista.
+
+********************************************************************************************************************************************************************************
+append(PrimeraLista, SegundaLista, ListaResultante)
+
+Concatena dos listas en ListaResultante.
+
+********************************************************************************************************************************************************************************
+last(Lista, ÚltimoElemento)
+
+Devuelve el último elemento de la lista.
+
+********************************************************************************************************************************************************************************
+reverse(ListaOriginal, ListaAlReves)
+
+Invierte el orden de la lista.
+
+********************************************************************************************************************************************************************************
+sum_list(ListaDeNumeros, SumaTotal)
+
+Suma todos los elementos de la lista.
+
+********************************************************************************************************************************************************************************
+list_to_set(ListaConRepetidos, ListaSinRepetidos)
+
+Convierte una lista en un conjunto (elimina duplicados).
+********************************************************************************************************************************************************************************
+max_member(ElementoMayor, Lista) // min_member(ElementoMenor, Lista)
+
+Devuelve el mayor elemento de la lista // Devuelve el menor elemento de la lista.
+
+********************************************************************************************************************************************************************************
+subset(ListaPequeña, ListaGrande)
+
+Verifica si todos los elementos de ListaPequeña están en ListaGrande.
+
+********************************************************************************************************************************************************************************
+flatten(ListaConSublistas, ListaPlana)
+
+• QuéQuiero → ListaPlana (la lista final sin listas anidadas)
+• Condición → Lista original que puede contener sublistas anidadas.
+• Resultado → Una lista con todos los elementos en un solo nivel.
+
+********************************************************************************************************************************************************************************
+union(Conjunto1, Conjunto2, Union)
+
+• QuéQuiero → Union (la lista con todos los elementos de ambos conjuntos, sin repetidos).
+• Condición → Dos listas tratadas como conjuntos.
+• Resultado → La unión de ambas listas.
+
+********************************************************************************************************************************************************************************
+intersection(Conjunto1, Conjunto2, Interseccion)
+
+• QuéQuiero → Interseccion (los elementos comunes a ambas listas).
+• Condición → Dos listas tratadas como conjuntos.
+• Resultado → Lista con los elementos que están en ambos.
+
+********************************************************************************************************************************************************************************
+abs(Número)
+
+• QuéQuiero → Valor absoluto del número.
+• Condición → Un número (positivo o negativo).
+• Resultado → El mismo número si es positivo, o su opuesto si es negativo.
+
+********************************************************************************************************************************************************************************
+sqrt(Número)
+
+• QuéQuiero → Raíz cuadrada del número.
+• Condición → Un número mayor o igual que 0.
+• Resultado → Número que multiplicado por sí mismo da el original.
+
+********************************************************************************************************************************************************************************
+between(Desde, Hasta, Valor)
+
+• QuéQuiero → Valor (un número entero dentro del rango).
+• Condición → Límites Desde y Hasta.
+• Resultado → Genera (o verifica) números en el rango [Desde, Hasta].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
