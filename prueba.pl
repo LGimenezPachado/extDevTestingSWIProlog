@@ -70,6 +70,7 @@ siguiente(N, Siguiente):- Siguiente is N + 1.
 
 % En una competencia de saltos, cada competidor puede hacer hasta 5 saltos; a cada salto se le asigna un puntaje de 0 a 10. Se define el predicado puntajes que relaciona cada competidor con los puntajes de sus saltos, p.ej.
 
+%Base de conocimientos
 puntajes(hernan,[3,5,8,6,9]).
 puntajes(julio,[9,7,3,9,10,2]).
 puntajes(ruben,[3,5,3,8,3]).
@@ -82,16 +83,18 @@ puntajes(roque,[7,10,10]).
 
 % Ayuda: investigar predicado nth1/3 y nth0/3 en el prolog.
 
-
+%Que puntaje obtuvo?
 puntaje(Persona, Salto, Puntaje) :-
     puntajes(Persona, ListaPuntos),
     nth1(Salto, ListaPuntos, Puntaje).
 
+%Esta descalificado
 estaDescalificado(Persona) :-
     puntajes(Persona, ListaPuntos),
     length(ListaPuntos, CantidadSaltos),
     CantidadSaltos > 5.
 
+%Clasificado a la final
 clasificaALaFinal(Persona):-
 	puntajes(Persona, ListaPuntos),
 	sum_list(ListaPuntos,PuntajeTotal),
@@ -117,6 +120,7 @@ clasificaALaFinal(Persona):-
 
 % Tenemos un modelo de la red de subtes, por medio de un predicado linea que relaciona el nombre de la linea con la lista de sus estaciones, en orden. P.ej. (reduciendo las lineas)
 
+%Base de conocimientos
 linea(a,[plazaMayo,peru,lima,congreso,miserere,rioJaneiro,primeraJunta,nazca]).
 linea(b,[alem,pellegrini,callao,pueyrredonB,gardel,medrano,malabia,lacroze,losIncas,urquiza]).
 linea(c,[retiro,diagNorte,avMayo,independenciaC,plazaC]).
@@ -143,16 +147,19 @@ combinacion([corrientes, pueyrredonB]). %h/b
 %linea(Linea,ListaEstaciones)
 %combinacion(ListaEstaciones)
 
+%En que linea esta una estacion
 estaEn(Linea,Estacion):-
 	linea(Linea,ListaEstaciones),
 	member(Estacion,ListaEstaciones).
 
+%Distancia entre estaciones de la misma linea
 distancia(Estacion1, Estacion2, Distancia) :-
     linea(_, ListaEstaciones),
     nth1(Pos1, ListaEstaciones, Estacion1),
     nth1(Pos2, ListaEstaciones, Estacion2),
     Distancia is abs(Pos1 - Pos2).
 
+%Comparacion altura de distintas lineas
 mismaAltura(Estacion1,Estacion2):-
 	linea(Linea1,ListaEstaciones1),
 	linea(Linea2,ListaEstaciones2),
@@ -161,6 +168,7 @@ mismaAltura(Estacion1,Estacion2):-
 	nth1(Pos2,ListaEstaciones2,Estacion2),
 	Pos1 = Pos2.
 
+%Viaje facil (Misma linea o una sola combinacion)
 viajeFacil(Estacion1,Estacion2):-
 	linea(_,ListaEstaciones),
 	member(Estacion1,ListaEstaciones),
@@ -190,40 +198,42 @@ viajeFacil(Estacion1,Estacion2):-
 % tramo(tiempo en vuelo)
 % Siempre se comienza de una ciudad (escala) y se termina en otra (no puede terminar en el aire al vuelo), con tiempo de vuelo entre medio de las ciudades. Considerar que los viajes son de ida y de vuelta por la misma ruta.
 
-vuelo(ARG845, 30, [escala(rosario,0), tramo(2), escala(buenosAires,0)]).
+%Base de conocimientos
+vuelo(arg845, 30, [escala(rosario,0), tramo(2), escala(buenosAires,0)]).
 
-vuelo(MH101, 95, [escala(kualaLumpur,0), tramo(9), escala(capeTown,2),
+vuelo(mh101, 95, [escala(kualaLumpur,0), tramo(9), escala(capeTown,2),
 tramo(15), escala(buenosAires,0)]).
 
-vuelo(DLH470, 60, [escala(berlin,0), tramo(9), escala(washington,2), tramo(2), escala(nuevaYork,0)]).
+vuelo(dlh470, 60, [escala(berlin,0), tramo(9), escala(washington,2), tramo(2), escala(nuevaYork,0)]).
 
-vuelo(AAL1803, 250, [escala(nuevaYork,0), tramo(1), escala(washington,2),
+vuelo(aal1803, 250, [escala(nuevaYork,0), tramo(1), escala(washington,2),
 tramo(3), escala(ottawa,3), tramo(15), escala(londres,4), tramo(1),
 escala(paris,0)]).
 
-vuelo(BLE849, 175, [escala(paris,0), tramo(2), escala(berlin,1), tramo(3),
+vuelo(ble849, 175, [escala(paris,0), tramo(2), escala(berlin,1), tramo(3),
 escala(kiev,2), tramo(2), escala(moscu,4), tramo(5), escala(seul,2), tramo(3), escala(tokyo,0)]).
 
-vuelo(NPO556, 150, [escala(kiev,0), tramo(1), escala(moscu,3), tramo(5),
+vuelo(npo556, 150, [escala(kiev,0), tramo(1), escala(moscu,3), tramo(5),
 escala(nuevaDelhi,6), tramo(2), escala(hongKong,4), tramo(2), escala(shanghai,5), tramo(3), escala(tokyo,0)]).
 
-vuelo(DSM3450, 75, [escala(santiagoDeChile,0), tramo(1), escala(buenosAires,2), tramo(7), escala(washington,4), tramo(15), escala(berlin,3), tramo(15), escala(tokyo,0)]).
+vuelo(dsm3450, 75, [escala(santiagoDeChile,0), tramo(1), escala(buenosAires,2), tramo(7), escala(washington,4), tramo(15), escala(berlin,3), tramo(15), escala(tokyo,0)]).
 
 % Definir los siguientes predicados; en todos vamos a identificar cada vuelo por su código.
 % tiempoTotalVuelo/2 : Relaciona un vuelo con el tiempo que lleva en total, contando las esperas en las escalas (y eventualmente en el origen y/o destino) más el tiempo de vuelo.
 % escalaAburrida/2 : Relaciona un vuelo con cada una de sus escalas aburridas; una escala es aburrida si hay que esperar mas de 3 horas.
 % ciudadesAburridas/2 : Relaciona un vuelo con la lista de ciudades de sus escalas aburridas.
-% vueloLargo/1: Si un vuelo pasa 10 o más horas en el aire, entonces es un vuelo largo. OJO que dice "en el aire", en este punto no hay que contar las esperas en tierra. conectados/2: Relaciona 2 vuelos si tienen al menos una ciudad en común.
+% vueloLargo/1: Si un vuelo pasa 10 o más horas en el aire, entonces es un vuelo largo. OJO que dice "en el aire", en este punto no hay que contar las esperas en tierra. 
+%conectados/2: Relaciona 2 vuelos si tienen al menos una ciudad en común.
 % bandaDeTres/3: Relaciona 3 vuelos si están conectados, el primero con el segundo, y el segundo con el tercero.
 % distanciaEnEscalas/3: Relaciona dos ciudades que son escalas del mismo vuelo y la cantidad de escalas entre las mismas; si no hay escalas intermedias la distancia es 1. P.ej. París y Berlín están a distancia 1 (por el vuelo BLE849), Berlín y Seúl están a distancia 3 (por el mismo vuelo). No importa de qué vuelo, lo que tiene que pasar es que haya algún vuelo que tenga como escalas a ambas ciudades. Consejo: usar nth1.
 % vueloLento/1: Un vuelo es lento si no es largo, y además cada escala es aburrida.
 
+%Tiempo total de vuelo
 tiempoTotalVuelo(CodigoVuelo, TiempoTotal):-
-	vuelo(CodigoVuelo,_,RecorridoTotal),
-	tiempoRecorridoTotal(RecorridoTotal,TiempoIda),
+	vuelo(CodigoVuelo,_,Destinos),
+	tiempoRecorridoTotal(Destinos,TiempoIda),
 	TiempoTotal is TiempoIda*2.
 
-tiempoRecorridoTotal([], 0).
 tiempoRecorridoTotal([escala(_, Espera) | Resto], Total) :-
     tiempoRecorridoTotal(Resto, Parcial),
     Total is Espera + Parcial.
@@ -231,8 +241,32 @@ tiempoRecorridoTotal([tramo(TiempoVuelo) | Resto], Total) :-
     tiempoRecorridoTotal(Resto, Parcial),
     Total is TiempoVuelo + Parcial.
 
-escalaAburrida(CodigoVuelo,Escala):-
-	vuelo(CodigoVuelo,_,RecorridoTotal),
+%Escala aburrida
+escalaAburrida(CodigoVuelo,Ciudad):-
+	vuelo(CodigoVuelo,_,Destinos),
+	member(escala(Ciudad, Espera), Destinos),
+	Espera >3.
+
+%Ciudades aburridas
+ciudadesAburridas(CodigoVuelo, Ciudades) :-
+    findall(Ciudad,escalaAburrida(CodigoVuelo, Ciudad),Ciudades).
+
+%Vuelo largo
+vuelolargo(CodigoVuelo,TiempoVuelo):-	
+	vuelo(CodigoVuelo,_,Destinos),
+	sum_list(tramo(TiempoVuelo),TiempoVuelo).
+
+
+
+
+
+	
+
+
+
+
+	
+
 	
 
 
