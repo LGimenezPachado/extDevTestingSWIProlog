@@ -1,4 +1,4 @@
-:- include(solucion).
+:- include(parcial).
 
 % --- Tests para examenDe/2 ---
 :- begin_tests(respuestasDe).
